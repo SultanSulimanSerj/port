@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { DocumentPreview } from "./document-preview";
+import { SendToApproval } from "./send-to-approval";
 
 interface Document {
   id: string;
@@ -21,6 +23,7 @@ interface DocumentListProps {
 export function DocumentList({ objectId, refreshTrigger }: DocumentListProps) {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [loading, setLoading] = useState(true);
+  const [previewDocument, setPreviewDocument] = useState<Document | null>(null);
 
   const fetchDocuments = async () => {
     try {
@@ -78,6 +81,15 @@ export function DocumentList({ objectId, refreshTrigger }: DocumentListProps) {
 
   return (
     <div className="space-y-4">
+      {previewDocument && (
+        <DocumentPreview
+          documentId={previewDocument.id}
+          fileName={previewDocument.fileName}
+          mimeType={previewDocument.mimeType}
+          onClose={() => setPreviewDocument(null)}
+        />
+      )}
+      
       {documents.length === 0 ? (
         <div className="text-center py-8 text-gray-500">
           No documents uploaded yet.
@@ -108,9 +120,13 @@ export function DocumentList({ objectId, refreshTrigger }: DocumentListProps) {
                 >
                   Download
                 </button>
-                <button className="text-gray-600 hover:text-gray-800 text-sm">
+                <button
+                  onClick={() => setPreviewDocument(doc)}
+                  className="text-gray-600 hover:text-gray-800 text-sm"
+                >
                   Preview
                 </button>
+                <SendToApproval documentId={doc.id} documentName={doc.name} />
               </div>
             </div>
           </div>

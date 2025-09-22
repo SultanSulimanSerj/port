@@ -32,7 +32,7 @@ export default function DocumentsPage() {
             <li>✅ Document versioning support</li>
             <li>✅ File type validation and preview</li>
             <li>✅ Download with presigned URLs</li>
-            <li>🔄 Link to Approvals workflow (coming soon)</li>
+            <li>✅ Link to Approvals workflow (mock implementation)</li>
           </ul>
         </div>
       </div>
