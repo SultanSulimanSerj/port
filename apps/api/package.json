@@ -9,9 +9,13 @@
     "start:prod": "node dist/main"
   },
   "dependencies": {
+    "@saas-portal/shared": "workspace:*",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
-    "@nestjs/platform-express": "^10.0.0"
+    "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/swagger": "^7.1.8",
+    "drizzle-orm": "^0.28.6",
+    "postgres": "^3.3.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
