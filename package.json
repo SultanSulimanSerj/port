@@ -1,26 +1,41 @@
 {
   "name": "saas-project-portal",
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "type-check": "turbo type-check",
     "test": "turbo test",
     "test:e2e": "turbo test:e2e",
-    "generate:openapi": "turbo generate:openapi",
     "generate:sdk": "turbo generate:sdk",
-    "db:migrate": "turbo db:migrate",
-    "db:seed": "turbo db:seed",
-    "clean": "turbo clean"
+    "db:generate": "cd apps/api && pnpm db:generate",
+    "db:migrate": "cd apps/api && pnpm db:migrate",
+    "db:studio": "cd apps/api && pnpm db:studio",
+    "clean": "turbo clean && rm -rf node_modules",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@turbo/gen": "^1.10.12",
-    "prettier": "^3.0.0",
-    "turbo": "^1.10.12"
+    "eslint": "^8.57.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "turbo": "^1.10.12",
+    "typescript": "^5.4.2"
   },
-  "packageManager": "pnpm@8.15.6",
-  "engines": {
-    "node": ">=18"
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   }
 }
