@@ -1,0 +1,3 @@
+{
+  "extends": ["@saas-portal/config/eslint", "next/core-web-vitals"]
+}
