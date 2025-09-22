@@ -143,10 +143,12 @@ export default function ObjectsPage() {
 
       <div className="grid gap-4">
         {objects.map((object) => (
-          <div key={object.id} className="border rounded p-4 bg-white shadow">
+          <div key={object.id} className="border rounded p-4 bg-white shadow hover:shadow-md transition-shadow">
             <div className="flex justify-between items-start">
-              <div>
-                <h3 className="text-xl font-semibold">{object.name}</h3>
+              <div className="flex-1">
+                <a href={`/objects/${object.id}`} className="text-xl font-semibold text-blue-600 hover:text-blue-800">
+                  {object.name}
+                </a>
                 {object.description && (
                   <p className="text-gray-600 mt-1">{object.description}</p>
                 )}
@@ -165,6 +167,13 @@ export default function ObjectsPage() {
                       Budget: {object.budget.toLocaleString()} {object.currency}
                     </span>
                   )}
+                </div>
+                <div className="mt-3 flex space-x-3">
+                  <a href={`/objects/${object.id}/documents`} className="text-sm text-blue-600 hover:underline">
+                    📄 Documents
+                  </a>
+                  <span className="text-sm text-gray-400">✅ Tasks (Phase 4)</span>
+                  <span className="text-sm text-gray-400">💰 Finance (Phase 5)</span>
                 </div>
               </div>
               <div className="text-sm text-gray-500">
